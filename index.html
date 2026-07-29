@@ -44,44 +44,66 @@
 
     .hero {
       position:relative;
+      min-height:clamp(610px,52vw,790px);
       overflow:hidden;
-      min-height:58svh;
-      background:#060708;
+      isolation:isolate;
+      background:#050708;
       border-bottom:1px solid var(--line);
     }
 
-    .hero img {
-      display:block;
+    .hero-art {
+      position:absolute;
+      inset:0;
+      z-index:-4;
       width:100%;
-      height:auto;
-      min-height:58svh;
+      height:100%;
       object-fit:cover;
       object-position:center top;
       user-select:none;
       -webkit-user-drag:none;
     }
 
-    /* 画像に描き込まれていた古いメニューを隠すための帯 */
-    .hero-shade {
+    /*
+      元画像に描き込まれている文字を隠す編集レイヤー
+      画像そのものには今後触れず
+      表示する文字はすべてHTMLで管理する
+    */
+    .hero::before {
+      content:"";
       position:absolute;
-      inset:0 0 auto;
-      z-index:2;
-      height:15%;
-      min-height:92px;
+      inset:0;
+      z-index:-3;
       background:
-        linear-gradient(180deg,rgba(3,7,10,.98) 0%,rgba(3,7,10,.94) 72%,rgba(3,7,10,0) 100%);
+        linear-gradient(180deg,
+          rgba(3,7,10,.99) 0,
+          rgba(3,7,10,.98) 12%,
+          rgba(3,7,10,.30) 24%,
+          rgba(3,7,10,0) 38%),
+        linear-gradient(90deg,
+          rgba(3,7,10,.99) 0,
+          rgba(3,7,10,.97) 24%,
+          rgba(3,7,10,.76) 37%,
+          rgba(3,7,10,.18) 52%,
+          rgba(3,7,10,0) 66%);
+      pointer-events:none;
+    }
+
+    .hero::after {
+      content:"";
+      position:absolute;
+      inset:auto 0 0;
+      z-index:-2;
+      height:24%;
+      background:linear-gradient(180deg,transparent,rgba(5,6,7,.40));
       pointer-events:none;
     }
 
     .site-header {
-      position:absolute;
-      inset:0 0 auto;
-      z-index:3;
       display:flex;
       align-items:flex-start;
       justify-content:space-between;
-      gap:28px;
-      padding:clamp(24px,3vw,42px) clamp(28px,5vw,78px);
+      gap:32px;
+      padding:clamp(26px,3.1vw,46px) clamp(28px,5vw,82px);
     }
 
     .brand {
@@ -93,7 +115,7 @@
     }
 
     .brand strong {
-      font-size:clamp(24px,2.2vw,37px);
+      font-size:clamp(27px,2.5vw,40px);
       font-weight:400;
       letter-spacing:.03em;
     }
@@ -143,21 +165,48 @@
       border-radius:999px;
     }
 
-    .hero-link {
-      position:absolute;
-      z-index:3;
-      left:4.2%;
-      top:66%;
-      width:16%;
-      height:9%;
-      border-radius:999px;
-      color:transparent;
-      text-indent:-9999px;
+    .hero-copy {
+      width:min(590px,48vw);
+      margin:clamp(40px,5vw,84px) 0 0 clamp(34px,7.7vw,122px);
+      font-family:"Yu Mincho","Hiragino Mincho ProN",serif;
     }
 
-    .hero-link:focus-visible {
-      outline:2px solid rgba(239,225,202,.7);
-      outline-offset:4px;
+    .hero-copy h1 {
+      margin:0;
+      font-size:clamp(42px,4.8vw,76px);
+      font-weight:400;
+      line-height:1.48;
+      letter-spacing:.08em;
+    }
+
+    .hero-copy p {
+      margin:clamp(28px,3vw,42px) 0 0;
+      color:#d8c8ae;
+      font-size:clamp(15px,1.35vw,19px);
+      line-height:2.2;
+      letter-spacing:.08em;
+    }
+
+    .hero-cta {
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-width:190px;
+      margin-top:clamp(27px,3vw,40px);
+      padding:14px 26px 15px;
+      border:1px solid rgba(226,202,164,.66);
+      border-radius:999px;
+      color:#ddcdb3;
+      font-size:13px;
+      letter-spacing:.10em;
+      transition:background .2s ease,color .2s ease;
+    }
+
+    .hero-cta:hover,
+    .hero-cta:focus-visible {
+      color:#fff3df;
+      background:rgba(239,225,202,.08);
+      outline:none;
     }
 
     .shelf-section {
@@ -380,17 +429,15 @@
     }
 
     @media (max-width:850px) {
-      .hero img {
-        min-height:65svh;
+      .hero {
+        min-height:720px;
+      }
+
+      .hero-art {
         object-position:57% top;
       }
 
-      .hero-shade {
-        height:170px;
-      }
-
       .site-header {
-        align-items:flex-start;
         padding:22px 20px;
       }
 
@@ -411,10 +458,9 @@
         padding:8px 14px 9px;
       }
 
-      .hero-link {
-        left:4%;
-        top:67%;
-        width:25%;
+      .hero-copy {
+        width:min(560px,78vw);
+        margin:110px 0 0 7vw;
       }
 
       .closing {
@@ -450,15 +496,19 @@
     }
 
     @media (max-width:620px) {
-      .site-header {
-        position:relative;
-        flex-direction:column;
-        gap:18px;
-        background:rgba(3,7,10,.98);
+      .hero {
+        min-height:760px;
       }
 
-      .hero-shade {
-        display:none;
+      .hero::before {
+        background:
+          linear-gradient(180deg,rgba(3,7,10,.99) 0,rgba(3,7,10,.96) 24%,rgba(3,7,10,.22) 50%,rgba(3,7,10,0) 72%),
+          linear-gradient(90deg,rgba(3,7,10,.98) 0,rgba(3,7,10,.82) 62%,rgba(3,7,10,.08) 100%);
+      }
+
+      .site-header {
+        flex-direction:column;
+        gap:20px;
       }
 
       .main-nav {
@@ -466,9 +516,17 @@
         justify-content:flex-start;
       }
 
-      .hero img {
-        margin-top:0;
-        min-height:auto;
+      .hero-copy {
+        width:calc(100% - 40px);
+        margin:92px 20px 0;
+      }
+
+      .hero-copy h1 {
+        font-size:clamp(38px,12vw,56px);
+      }
+
+      .hero-copy p {
+        font-size:15px;
       }
     }
 
@@ -481,14 +539,13 @@
 <body>
   <header class="hero">
     <img
+      class="hero-art"
       src="assets/hermes-room.webp"
       alt="東京タワーを望む夜の書斎"
       width="1536"
       height="628"
       fetchpriority="high"
     >
-
-    <div class="hero-shade" aria-hidden="true"></div>
 
     <div class="site-header">
       <a class="brand" href="index.html" aria-label="Hermes トップ">
@@ -513,7 +570,16 @@
       </nav>
     </div>
 
-    <a class="hero-link" href="#bookshelf">観測の本棚へ</a>
+    <div class="hero-copy">
+      <h1>世界を観測するための<br>ピンを置く</h1>
+
+      <p>
+        どこにピンを刺すかで<br>
+        立ち上がる景色は変わる
+      </p>
+
+      <a class="hero-cta" href="#bookshelf">観測の本棚へ　→</a>
+    </div>
   </header>
 
   <main>

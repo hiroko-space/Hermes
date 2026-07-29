@@ -5,192 +5,264 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#080706">
   <title>Hermes｜観測の本棚</title>
-  <meta name="description" content="世界を観測するためのピンを置く。Hermesは、観測の軌跡を並べる本棚です。">
+  <meta name="description" content="世界を観測するためのピンを置く　Hermesは観測の軌跡を並べる本棚です">
 
   <meta property="og:title" content="Hermes｜観測の本棚">
-  <meta property="og:description" content="世界を観測するためのピンを置く。">
+  <meta property="og:description" content="世界を観測するためのピンを置く">
   <meta property="og:type" content="website">
   <meta property="og:image" content="assets/hermes-room.webp">
 
   <style>
     :root {
-      --bg: #080706;
-      --bg-soft: #100c09;
-      --cream: #efe1ca;
-      --muted: #b8a990;
-      --gold: #caa36d;
-      --line: rgba(239,225,202,.18);
-      --wood-a: #2d1b10;
-      --wood-b: #714824;
+      --bg:#080706;
+      --cream:#efe1ca;
+      --muted:#b8a990;
+      --gold:#caa36d;
+      --line:rgba(239,225,202,.18);
+      --wood-a:#2d1b10;
+      --wood-b:#714824;
     }
 
-    * { box-sizing: border-box; }
+    * { box-sizing:border-box; }
 
     html {
-      scroll-behavior: smooth;
-      background: var(--bg);
+      scroll-behavior:smooth;
+      background:var(--bg);
     }
 
     body {
-      margin: 0;
-      min-width: 320px;
-      color: var(--cream);
-      background: var(--bg);
-      font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", "Noto Sans JP", sans-serif;
-      letter-spacing: .035em;
+      margin:0;
+      min-width:320px;
+      color:var(--cream);
+      background:var(--bg);
+      font-family:"Hiragino Kaku Gothic ProN","Yu Gothic","Noto Sans JP",sans-serif;
+      letter-spacing:.035em;
     }
 
-    a { color: inherit; text-decoration: none; }
-    button { font: inherit; }
+    a { color:inherit; text-decoration:none; }
+    button { font:inherit; }
 
     .hero {
-      position: relative;
-      overflow: hidden;
-      background: #060708;
-      border-bottom: 1px solid var(--line);
+      position:relative;
+      overflow:hidden;
+      min-height:58svh;
+      background:#060708;
+      border-bottom:1px solid var(--line);
     }
 
     .hero img {
-      display: block;
-      width: 100%;
-      height: auto;
-      min-height: 58svh;
-      object-fit: cover;
-      object-position: center top;
-      user-select: none;
-      -webkit-user-drag: none;
+      display:block;
+      width:100%;
+      height:auto;
+      min-height:58svh;
+      object-fit:cover;
+      object-position:center top;
+      user-select:none;
+      -webkit-user-drag:none;
+    }
+
+    /* 画像に描き込まれていた古いメニューを隠すための帯 */
+    .hero-shade {
+      position:absolute;
+      inset:0 0 auto;
+      z-index:2;
+      height:15%;
+      min-height:92px;
+      background:
+        linear-gradient(180deg,rgba(3,7,10,.98) 0%,rgba(3,7,10,.94) 72%,rgba(3,7,10,0) 100%);
+      pointer-events:none;
+    }
+
+    .site-header {
+      position:absolute;
+      inset:0 0 auto;
+      z-index:3;
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:28px;
+      padding:clamp(24px,3vw,42px) clamp(28px,5vw,78px);
+    }
+
+    .brand {
+      display:flex;
+      flex-direction:column;
+      flex:0 0 auto;
+      font-family:Georgia,"Times New Roman",serif;
+      line-height:1;
+    }
+
+    .brand strong {
+      font-size:clamp(24px,2.2vw,37px);
+      font-weight:400;
+      letter-spacing:.03em;
+    }
+
+    .brand small {
+      margin-top:8px;
+      color:#aa987e;
+      font-size:9px;
+      letter-spacing:.18em;
+    }
+
+    .main-nav {
+      display:flex;
+      align-items:center;
+      justify-content:flex-end;
+      gap:clamp(24px,3.2vw,52px);
+      font-family:"Yu Mincho","Hiragino Mincho ProN",serif;
+    }
+
+    .nav-link {
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:5px;
+      min-width:max-content;
+      color:#d9c9b0;
+      font-size:clamp(13px,1.1vw,17px);
+      line-height:1.2;
+      transition:color .2s ease;
+    }
+
+    .nav-link small {
+      color:#a99476;
+      font:11px Georgia,"Times New Roman",serif;
+      letter-spacing:.06em;
+    }
+
+    .nav-link:hover,
+    .nav-link:focus-visible {
+      color:#fff3df;
+      outline:none;
+    }
+
+    .nav-pill {
+      padding:11px 23px 12px;
+      border:1px solid rgba(226,202,164,.64);
+      border-radius:999px;
     }
 
     .hero-link {
-      position: absolute;
-      left: 4.2%;
-      top: 66%;
-      width: 13.5%;
-      height: 8%;
-      border-radius: 999px;
-      color: transparent;
-      text-indent: -9999px;
+      position:absolute;
+      z-index:3;
+      left:4.2%;
+      top:66%;
+      width:16%;
+      height:9%;
+      border-radius:999px;
+      color:transparent;
+      text-indent:-9999px;
     }
 
     .hero-link:focus-visible {
-      outline: 2px solid rgba(239,225,202,.7);
-      outline-offset: 4px;
+      outline:2px solid rgba(239,225,202,.7);
+      outline-offset:4px;
     }
 
     .shelf-section {
-      padding: clamp(58px, 7vw, 96px) 4vw clamp(76px, 9vw, 120px);
+      padding:clamp(58px,7vw,96px) 4vw clamp(76px,9vw,120px);
       background:
-        radial-gradient(circle at 50% -10%, rgba(120,79,40,.15), transparent 38%),
-        linear-gradient(180deg, #120e0b 0%, #080706 78%);
+        radial-gradient(circle at 50% -10%,rgba(120,79,40,.15),transparent 38%),
+        linear-gradient(180deg,#120e0b 0%,#080706 78%);
     }
 
     .section-head {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 0;
-      align-items: end;
-      max-width: 1480px;
-      margin: 0 auto 36px;
+      max-width:1480px;
+      margin:0 auto 36px;
     }
 
     .section-head h2 {
-      margin: 0;
-      font-family: "Yu Mincho", "Hiragino Mincho ProN", serif;
-      font-size: clamp(32px, 4vw, 58px);
-      font-weight: 400;
-      letter-spacing: .06em;
-      line-height: 1.25;
+      margin:0;
+      font-family:"Yu Mincho","Hiragino Mincho ProN",serif;
+      font-size:clamp(32px,4vw,58px);
+      font-weight:400;
+      letter-spacing:.06em;
+      line-height:1.25;
     }
 
     .section-head h2 small {
-      display: block;
-      margin-bottom: 9px;
-      color: #a9977d;
-      font: 11px Georgia, "Times New Roman", serif;
-      letter-spacing: .22em;
-      text-transform: uppercase;
-    }
-
-    .section-head p {
-      margin: 0;
-      max-width: 710px;
-      color: #c4b49d;
-      font-family: "Yu Mincho", "Hiragino Mincho ProN", serif;
-      font-size: 14px;
-      line-height: 2;
+      display:block;
+      margin-bottom:9px;
+      color:#a9977d;
+      font:11px Georgia,"Times New Roman",serif;
+      letter-spacing:.22em;
+      text-transform:uppercase;
     }
 
     .bookshelf {
-      position: relative;
-      max-width: 1480px;
-      margin: 0 auto;
-      padding: 44px 28px 58px;
-      border: 1px solid rgba(239,225,202,.12);
+      position:relative;
+      max-width:1480px;
+      margin:0 auto;
+      padding:44px 28px 58px;
+      border:1px solid rgba(239,225,202,.12);
       background:
-        linear-gradient(180deg, rgba(255,255,255,.025), transparent 27%),
+        linear-gradient(180deg,rgba(255,255,255,.025),transparent 27%),
         #110d0a;
       box-shadow:
         inset 0 0 82px rgba(0,0,0,.62),
         0 30px 75px rgba(0,0,0,.28);
-      overflow: hidden;
+      overflow:hidden;
     }
 
     .books {
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-      gap: clamp(8px, .8vw, 14px);
-      min-height: 365px;
-      overflow-x: auto;
-      padding: 0 12px 28px;
-      scrollbar-color: #5e4025 #120d09;
+      display:flex;
+      align-items:flex-end;
+      justify-content:center;
+      gap:clamp(8px,.8vw,14px);
+      min-height:365px;
+      overflow-x:auto;
+      padding:0 12px 28px;
+      scrollbar-color:#5e4025 #120d09;
     }
 
     .book {
-      --c1: #282724;
-      --c2: #121310;
-      flex: 0 0 clamp(72px, 6.2vw, 92px);
-      height: var(--h, 300px);
-      padding: 16px 11px 14px;
-      border: 0;
-      border-radius: 4px 4px 2px 2px;
-      color: #eadfce;
-      cursor: pointer;
-      writing-mode: vertical-rl;
+      --c1:#282724;
+      --c2:#121310;
+      flex:0 0 clamp(72px,6.2vw,92px);
+      height:var(--h,300px);
+      padding:16px 11px 14px;
+      border:0;
+      border-radius:4px 4px 2px 2px;
+      color:#eadfce;
+      cursor:pointer;
+      writing-mode:vertical-rl;
       background:
-        linear-gradient(90deg, rgba(255,255,255,.075), transparent 15%, transparent 83%, rgba(0,0,0,.35)),
-        linear-gradient(var(--c1), var(--c2));
+        linear-gradient(90deg,rgba(255,255,255,.075),transparent 15%,transparent 83%,rgba(0,0,0,.35)),
+        linear-gradient(var(--c1),var(--c2));
       box-shadow:
         7px 8px 18px rgba(0,0,0,.43),
         inset 0 0 0 1px rgba(240,220,184,.13);
-      transition: transform .24s ease, filter .24s ease;
+      transition:transform .24s ease,filter .24s ease;
     }
 
     .book:hover,
     .book:focus-visible {
-      transform: translateY(-16px);
-      filter: brightness(1.1);
-      outline: none;
+      transform:translateY(-16px);
+      filter:brightness(1.1);
+      outline:none;
     }
 
     .book .vol {
-      font: 10px Georgia, "Times New Roman", serif;
-      letter-spacing: .11em;
+      font:10px Georgia,"Times New Roman",serif;
+      letter-spacing:.11em;
     }
 
     .book .title {
-      margin: auto;
-      font-family: "Yu Mincho", "Hiragino Mincho ProN", serif;
-      font-size: clamp(17px, 1.45vw, 21px);
-      letter-spacing: .08em;
+      margin:auto;
+      font-family:"Yu Mincho","Hiragino Mincho ProN",serif;
+      font-size:clamp(17px,1.45vw,21px);
+      letter-spacing:.08em;
     }
 
     .book .sub {
-      color: #c3b49d;
-      font-size: 9px;
-      letter-spacing: .08em;
+      color:#c3b49d;
+      font-size:9px;
+      letter-spacing:.08em;
     }
 
+    .b0  { --c1:#d8cfbf; --c2:#aaa090; --h:304px; color:#2a241c; }
+    .b0 .sub { color:#5f5548; }
     .b1  { --c1:#252725; --c2:#111412; --h:296px; }
     .b2  { --c1:#52251f; --c2:#25110e; --h:310px; }
     .b3  { --c1:#20373b; --c2:#0f2022; --h:288px; }
@@ -201,186 +273,246 @@
     .b8  { --c1:#65532b; --c2:#302510; --h:290px; }
     .b9  { --c1:#493d31; --c2:#231c16; --h:316px; }
     .b10 { --c1:#665a46; --c2:#30291f; --h:300px; }
-    .b11 {
-      --c1: #d8cfbf;
-      --c2: #aaa090;
-      --h: 304px;
-      color: #2a241c;
-    }
-
-    .b11 .sub {
-      color: #5f5548;
-    }
 
     .shelf-plank {
-      height: 25px;
-      margin-top: -20px;
+      height:25px;
+      margin-top:-20px;
       background:
-        linear-gradient(180deg, rgba(255,255,255,.12), transparent 22%),
-        linear-gradient(90deg, var(--wood-a), var(--wood-b) 30%, #3b2517 68%, #7a502a);
-      box-shadow: 0 14px 22px rgba(0,0,0,.56);
+        linear-gradient(180deg,rgba(255,255,255,.12),transparent 22%),
+        linear-gradient(90deg,var(--wood-a),var(--wood-b) 30%,#3b2517 68%,#7a502a);
+      box-shadow:0 14px 22px rgba(0,0,0,.56);
     }
 
     .closing {
-      display: grid;
-      grid-template-columns: .8fr 1.2fr;
-      gap: 38px;
-      padding: clamp(72px, 8vw, 108px) 4vw;
-      color: #201c17;
-      background: #ece4d8;
+      display:grid;
+      grid-template-columns:.8fr 1.2fr;
+      gap:38px;
+      padding:clamp(72px,8vw,108px) 4vw;
+      color:#201c17;
+      background:#ece4d8;
     }
 
     .closing .label {
-      color: #766b5d;
-      font: 11px Georgia, "Times New Roman", serif;
-      letter-spacing: .22em;
-      text-transform: uppercase;
+      color:#766b5d;
+      font:11px Georgia,"Times New Roman",serif;
+      letter-spacing:.22em;
+      text-transform:uppercase;
     }
 
     .closing blockquote {
-      margin: 0;
-      font-family: "Yu Mincho", "Hiragino Mincho ProN", serif;
-      font-size: clamp(26px, 3.3vw, 50px);
-      font-weight: 400;
-      line-height: 1.65;
+      margin:0;
+      font-family:"Yu Mincho","Hiragino Mincho ProN",serif;
+      font-size:clamp(26px,3.3vw,50px);
+      font-weight:400;
+      line-height:1.65;
     }
 
     .closing footer {
-      margin-top: 31px;
-      color: #786d60;
-      font-size: 13px;
+      margin-top:31px;
+      color:#786d60;
+      font-size:13px;
     }
 
     .site-footer {
-      display: flex;
-      justify-content: space-between;
-      gap: 24px;
-      padding: 25px 4vw 36px;
-      color: #776c5f;
-      background: #ece4d8;
-      border-top: 1px solid rgba(45,36,27,.13);
-      font-size: 10px;
-      letter-spacing: .15em;
-      text-transform: uppercase;
+      display:flex;
+      justify-content:space-between;
+      gap:24px;
+      padding:25px 4vw 36px;
+      color:#776c5f;
+      background:#ece4d8;
+      border-top:1px solid rgba(45,36,27,.13);
+      font-size:10px;
+      letter-spacing:.15em;
+      text-transform:uppercase;
     }
 
     dialog {
-      width: min(720px, calc(100vw - 28px));
-      padding: 0;
-      border: 1px solid rgba(225,203,165,.25);
-      color: var(--cream);
-      background: #0f0c0a;
-      box-shadow: 0 40px 120px rgba(0,0,0,.72);
+      width:min(720px,calc(100vw - 28px));
+      padding:0;
+      border:1px solid rgba(225,203,165,.25);
+      color:var(--cream);
+      background:#0f0c0a;
+      box-shadow:0 40px 120px rgba(0,0,0,.72);
     }
 
     dialog::backdrop {
-      background: rgba(0,0,0,.72);
-      backdrop-filter: blur(6px);
+      background:rgba(0,0,0,.72);
+      backdrop-filter:blur(6px);
     }
 
     .modal {
-      position: relative;
-      padding: clamp(36px, 6vw, 56px);
+      position:relative;
+      padding:clamp(36px,6vw,56px);
     }
 
     .modal small {
-      display: block;
-      color: #9f8f78;
-      font: 10px Georgia, "Times New Roman", serif;
-      letter-spacing: .18em;
-      text-transform: uppercase;
+      display:block;
+      color:#9f8f78;
+      font:10px Georgia,"Times New Roman",serif;
+      letter-spacing:.18em;
+      text-transform:uppercase;
     }
 
     .modal h3 {
-      margin: 18px 0 22px;
-      font-family: "Yu Mincho", "Hiragino Mincho ProN", serif;
-      font-size: clamp(33px, 5vw, 48px);
-      font-weight: 400;
-      line-height: 1.4;
+      margin:18px 0 22px;
+      font-family:"Yu Mincho","Hiragino Mincho ProN",serif;
+      font-size:clamp(33px,5vw,48px);
+      font-weight:400;
+      line-height:1.4;
     }
 
     .modal p {
-      margin: 0;
-      color: #c6b7a1;
-      font-family: "Yu Mincho", "Hiragino Mincho ProN", serif;
-      line-height: 2;
+      margin:0;
+      color:#c6b7a1;
+      font-family:"Yu Mincho","Hiragino Mincho ProN",serif;
+      line-height:2;
     }
 
     .close {
-      position: absolute;
-      top: 12px;
-      right: 16px;
-      border: 0;
-      color: #ae9c82;
-      background: transparent;
-      cursor: pointer;
-      font-size: 28px;
+      position:absolute;
+      top:12px;
+      right:16px;
+      border:0;
+      color:#ae9c82;
+      background:transparent;
+      cursor:pointer;
+      font-size:28px;
     }
 
-    @media (max-width: 850px) {
+    @media (max-width:850px) {
       .hero img {
-        min-height: 65svh;
-        object-position: 57% top;
+        min-height:65svh;
+        object-position:57% top;
+      }
+
+      .hero-shade {
+        height:170px;
+      }
+
+      .site-header {
+        align-items:flex-start;
+        padding:22px 20px;
+      }
+
+      .main-nav {
+        gap:14px;
+        flex-wrap:wrap;
+      }
+
+      .nav-link {
+        font-size:12px;
+      }
+
+      .nav-link small {
+        font-size:9px;
+      }
+
+      .nav-pill {
+        padding:8px 14px 9px;
       }
 
       .hero-link {
-        left: 4%;
-        top: 67%;
-        width: 25%;
-        height: 9%;
+        left:4%;
+        top:67%;
+        width:25%;
       }
 
-      .section-head,
       .closing {
-        grid-template-columns: 1fr;
+        grid-template-columns:1fr;
       }
 
       .shelf-section {
-        padding-left: 18px;
-        padding-right: 18px;
+        padding-left:18px;
+        padding-right:18px;
       }
 
       .bookshelf {
-        padding-left: 9px;
-        padding-right: 9px;
+        padding-left:9px;
+        padding-right:9px;
       }
 
       .books {
-        justify-content: flex-start;
+        justify-content:flex-start;
       }
 
       .book {
-        flex-basis: 78px;
+        flex-basis:78px;
       }
 
       .closing {
-        padding-left: 22px;
-        padding-right: 22px;
+        padding-left:22px;
+        padding-right:22px;
       }
 
       .site-footer {
-        flex-direction: column;
+        flex-direction:column;
       }
     }
 
-    @media (prefers-reduced-motion: reduce) {
-      * { scroll-behavior: auto !important; }
-      .book { transition: none; }
+    @media (max-width:620px) {
+      .site-header {
+        position:relative;
+        flex-direction:column;
+        gap:18px;
+        background:rgba(3,7,10,.98);
+      }
+
+      .hero-shade {
+        display:none;
+      }
+
+      .main-nav {
+        width:100%;
+        justify-content:flex-start;
+      }
+
+      .hero img {
+        margin-top:0;
+        min-height:auto;
+      }
     }
-</style>
+
+    @media (prefers-reduced-motion:reduce) {
+      * { scroll-behavior:auto !important; }
+      .book { transition:none; }
+    }
+  </style>
 </head>
 <body>
   <header class="hero">
     <img
       src="assets/hermes-room.webp"
-      alt="東京タワーを望む夜の書斎。机には書きかけのノートとペン、ワインと灯りが置かれている。"
+      alt="東京タワーを望む夜の書斎"
       width="1536"
       height="628"
       fetchpriority="high"
     >
-    <a class="hero-hotspot hotspot-bookshelf" href="#bookshelf">本棚へ</a>
-    <a class="hero-hotspot hotspot-about" href="books/about.html">書き手について</a>
-    <a class="hero-hotspot hotspot-vol00" href="books/vol00.html">はじめての方へ</a>
+
+    <div class="hero-shade" aria-hidden="true"></div>
+
+    <div class="site-header">
+      <a class="brand" href="index.html" aria-label="Hermes トップ">
+        <strong>Hermes</strong>
+        <small>OBSERVATORY OF PERCEPTION</small>
+      </a>
+
+      <nav class="main-nav" aria-label="主要メニュー">
+        <a class="nav-link" href="#bookshelf">
+          <span>本棚</span>
+          <small>Bookshelf</small>
+        </a>
+
+        <a class="nav-link" href="books/about.html">
+          <span>書き手について</span>
+          <small>About</small>
+        </a>
+
+        <a class="nav-link nav-pill" href="books/vol00.html">
+          <span>はじめての方へ</span>
+        </a>
+      </nav>
+    </div>
+
     <a class="hero-link" href="#bookshelf">観測の本棚へ</a>
   </header>
 
@@ -392,51 +524,51 @@
 
       <div class="bookshelf">
         <div class="books">
-          <a class="book b11" href="books/vol00.html" aria-label="Vol.00 はじまりの観測を開く">
-            <span class="vol">Vol.00</span><span class="title">はじまりの観測</span><span class="sub">Hermesとは</span>
+          <a class="book b0" href="books/vol00.html">
+            <span class="vol">Vol.00</span>
+            <span class="title">はじまりの観測</span>
+            <span class="sub">Hermesとは</span>
           </a>
 
-          <button class="book b1" data-vol="Vol.01" data-title="身体" data-copy="感覚・状態・エネルギー。身体にピンを刺したとき、世界はどのような輪郭を見せるのか。">
-            <span class="vol">Vol.01</span><span class="title">身体</span><span class="sub">感覚・状態・エネルギー</span>
+          <button class="book b1" data-vol="Vol.01" data-title="身体" data-copy="感覚　状態　エネルギー　身体にピンを刺したとき世界はどのような輪郭を見せるのか">
+            <span class="vol">Vol.01</span><span class="title">身体</span><span class="sub">感覚　状態　エネルギー</span>
           </button>
 
-          <button class="book b2" data-vol="Vol.02" data-title="感情" data-copy="気分・感情・価値観・信念。内側に生まれた反応から、何が見えてくるのか。">
-            <span class="vol">Vol.02</span><span class="title">感情</span><span class="sub">気分・価値観・信念</span>
+          <button class="book b2" data-vol="Vol.02" data-title="感情" data-copy="気分　感情　価値観　信念　内側に生まれた反応から何が見えてくるのか">
+            <span class="vol">Vol.02</span><span class="title">感情</span><span class="sub">気分　価値観　信念</span>
           </button>
 
-          <button class="book b3" data-vol="Vol.03" data-title="思考" data-copy="認知・判断・イメージ・パターン。思考の仕組みにピンを刺して観測する。">
-            <span class="vol">Vol.03</span><span class="title">思考</span><span class="sub">認知・判断・パターン</span>
+          <button class="book b3" data-vol="Vol.03" data-title="思考" data-copy="認知　判断　イメージ　パターン　思考の仕組みにピンを刺して観測する">
+            <span class="vol">Vol.03</span><span class="title">思考</span><span class="sub">認知　判断　パターン</span>
           </button>
 
-          <button class="book b4" data-vol="Vol.04" data-title="時間" data-copy="過去・現在・未来・タイミング。時間という位置から世界を観測する。">
-            <span class="vol">Vol.04</span><span class="title">時間</span><span class="sub">過去・現在・未来</span>
+          <button class="book b4" data-vol="Vol.04" data-title="時間" data-copy="過去　現在　未来　タイミング　時間という位置から世界を観測する">
+            <span class="vol">Vol.04</span><span class="title">時間</span><span class="sub">過去　現在　未来</span>
           </button>
 
-          <button class="book b5" data-vol="Vol.05" data-title="記憶" data-copy="出来事、学び、繰り返されるパターン。記憶が現在につくる輪郭を観測する。">
-            <span class="vol">Vol.05</span><span class="title">記憶</span><span class="sub">出来事・学び・パターン</span>
+          <button class="book b5" data-vol="Vol.05" data-title="記憶" data-copy="出来事　学び　繰り返されるパターン　記憶が現在につくる輪郭を観測する">
+            <span class="vol">Vol.05</span><span class="title">記憶</span><span class="sub">出来事　学び　パターン</span>
           </button>
 
-          <button class="book b6" data-vol="Vol.06" data-title="環境" data-copy="人・場所・自然・気圧・気温・匂い。外側の条件によって立ち上がる景色。">
-            <span class="vol">Vol.06</span><span class="title">環境</span><span class="sub">人・場所・自然・気圧</span>
+          <button class="book b6" data-vol="Vol.06" data-title="環境" data-copy="人　場所　自然　気圧　気温　匂い　外側の条件によって立ち上がる景色">
+            <span class="vol">Vol.06</span><span class="title">環境</span><span class="sub">人　場所　自然　気圧</span>
           </button>
 
-          <button class="book b7" data-vol="Vol.07" data-title="対話・他者・AI" data-copy="関係性の中で生まれる言葉と認識。対話によって見えてくる方向を観測する。">
-            <span class="vol">Vol.07</span><span class="title">対話・他者・AI</span><span class="sub">人・本・情報・関係性</span>
+          <button class="book b7" data-vol="Vol.07" data-title="対話　他者　AI" data-copy="関係性の中で生まれる言葉と認識　対話によって見えてくる方向を観測する">
+            <span class="vol">Vol.07</span><span class="title">対話　他者　AI</span><span class="sub">人　本　情報　関係性</span>
           </button>
 
-          <button class="book b8" data-vol="Vol.08" data-title="価値・意味" data-copy="何を大切にするのか。価値、意味、信念、目的にピンを刺したときに見えるもの。">
-            <span class="vol">Vol.08</span><span class="title">価値・意味</span><span class="sub">信念・目的・生命の木</span>
+          <button class="book b8" data-vol="Vol.08" data-title="価値　意味" data-copy="何を大切にするのか　価値　意味　信念　目的にピンを刺したときに見えるもの">
+            <span class="vol">Vol.08</span><span class="title">価値　意味</span><span class="sub">信念　目的　生命の木</span>
           </button>
 
-          <button class="book b9" data-vol="Vol.09" data-title="創造・表現" data-copy="言葉、作品、物語。観測されたものが、どのように世界へ置かれていくのか。">
-            <span class="vol">Vol.09</span><span class="title">創造・表現</span><span class="sub">言葉・作品・物語</span>
+          <button class="book b9" data-vol="Vol.09" data-title="創造　表現" data-copy="言葉　作品　物語　観測されたものがどのように世界へ置かれていくのか">
+            <span class="vol">Vol.09</span><span class="title">創造　表現</span><span class="sub">言葉　作品　物語</span>
           </button>
 
-          <button class="book b10" data-vol="Vol.10" data-title="お金・物質" data-copy="価値の交換、所有、豊かさ、現実の条件。物質にピンを刺したときに立ち上がる景色。">
-            <span class="vol">Vol.10</span><span class="title">お金・物質</span><span class="sub">豊かさ・交換・現実</span>
+          <button class="book b10" data-vol="Vol.10" data-title="お金　物質" data-copy="価値の交換　所有　豊かさ　現実の条件　物質にピンを刺したときに立ち上がる景色">
+            <span class="vol">Vol.10</span><span class="title">お金　物質</span><span class="sub">豊かさ　交換　現実</span>
           </button>
-
-
         </div>
 
         <div class="shelf-plank"></div>
@@ -450,7 +582,7 @@
           どこにピンを刺すかで<br>
           見える世界は変わる
         </blockquote>
-        <footer>続きは、あなたの世界で。 — Hermes</footer>
+        <footer>続きは　あなたの世界で　— Hermes</footer>
       </div>
     </section>
   </main>
@@ -470,33 +602,33 @@
   </dialog>
 
   <script>
-    const dialog = document.getElementById("book-dialog");
-    const modalVol = document.getElementById("modal-vol");
-    const modalTitle = document.getElementById("modal-title");
-    const modalCopy = document.getElementById("modal-copy");
-    const close = dialog.querySelector(".close");
+    const dialog = document.getElementById("book-dialog")
+    const modalVol = document.getElementById("modal-vol")
+    const modalTitle = document.getElementById("modal-title")
+    const modalCopy = document.getElementById("modal-copy")
+    const closeButton = dialog.querySelector(".close")
 
     document.querySelectorAll("button.book").forEach((book) => {
       book.addEventListener("click", () => {
-        modalVol.textContent = book.dataset.vol;
-        modalTitle.textContent = book.dataset.title;
-        modalCopy.textContent = book.dataset.copy;
-        dialog.showModal();
-      });
-    });
+        modalVol.textContent = book.dataset.vol
+        modalTitle.textContent = book.dataset.title
+        modalCopy.textContent = book.dataset.copy
+        dialog.showModal()
+      })
+    })
 
-    close.addEventListener("click", () => dialog.close());
+    closeButton.addEventListener("click", () => dialog.close())
 
     dialog.addEventListener("click", (event) => {
-      const rect = dialog.getBoundingClientRect();
+      const rect = dialog.getBoundingClientRect()
       const outside =
         event.clientX < rect.left ||
         event.clientX > rect.right ||
         event.clientY < rect.top ||
-        event.clientY > rect.bottom;
+        event.clientY > rect.bottom
 
-      if (outside) dialog.close();
-    });
+      if (outside) dialog.close()
+    })
   </script>
 </body>
 </html>

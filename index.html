@@ -367,10 +367,56 @@
       * { scroll-behavior: auto !important; }
       .book { transition: none; }
     }
+
+
+    .site-nav {
+      position: absolute;
+      top: clamp(18px, 3vw, 34px);
+      right: 4vw;
+      z-index: 5;
+      display: flex;
+      align-items: center;
+      gap: clamp(14px, 2.2vw, 30px);
+      color: rgba(239,225,202,.9);
+      font-family: "Yu Mincho", "Hiragino Mincho ProN", serif;
+      font-size: 12px;
+      letter-spacing: .12em;
+    }
+
+    .site-nav a {
+      padding: 8px 0;
+      border-bottom: 1px solid transparent;
+      transition: border-color .2s ease;
+    }
+
+    .site-nav a:hover,
+    .site-nav a:focus-visible {
+      border-color: rgba(239,225,202,.58);
+      outline: none;
+    }
+
+    a.book {
+      display: flex;
+      align-items: stretch;
+      text-decoration: none;
+    }
+
+    @media (max-width: 620px) {
+      .site-nav {
+        top: 14px;
+        right: 18px;
+        gap: 16px;
+        font-size: 10px;
+      }
+    }
   </style>
 </head>
 <body>
   <header class="hero">
+    <nav class="site-nav" aria-label="メインナビゲーション">
+      <a href="#bookshelf">本棚</a>
+      <a href="books/about.html">書き手について <span lang="en">About</span></a>
+    </nav>
     <img
       src="assets/hermes-room.webp"
       alt="東京タワーを望む夜の書斎。机には書きかけのノートとペン、ワインと灯りが置かれている。"
@@ -389,6 +435,10 @@
 
       <div class="bookshelf">
         <div class="books">
+          <a class="book b11" href="books/vol00.html" aria-label="Vol.00 はじまりの観測を開く">
+            <span class="vol">Vol.00</span><span class="title">はじまりの観測</span><span class="sub">Hermesとは</span>
+          </a>
+
           <button class="book b1" data-vol="Vol.01" data-title="身体" data-copy="感覚・状態・エネルギー。身体にピンを刺したとき、世界はどのような輪郭を見せるのか。">
             <span class="vol">Vol.01</span><span class="title">身体</span><span class="sub">感覚・状態・エネルギー</span>
           </button>
@@ -429,9 +479,7 @@
             <span class="vol">Vol.10</span><span class="title">お金・物質</span><span class="sub">豊かさ・交換・現実</span>
           </button>
 
-          <button class="book b11" data-vol="Vol.00" data-title="はじまりの観測" data-copy="Hermesという本棚が生まれた場所。観測、翻訳、そしてピンという考え方の入口。">
-            <span class="vol">Vol.00</span><span class="title">はじまりの観測</span><span class="sub">Hermesとは</span>
-          </button>
+
         </div>
 
         <div class="shelf-plank"></div>
@@ -471,7 +519,7 @@
     const modalCopy = document.getElementById("modal-copy");
     const close = dialog.querySelector(".close");
 
-    document.querySelectorAll(".book").forEach((book) => {
+    document.querySelectorAll("button.book").forEach((book) => {
       book.addEventListener("click", () => {
         modalVol.textContent = book.dataset.vol;
         modalTitle.textContent = book.dataset.title;

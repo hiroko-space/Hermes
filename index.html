@@ -367,56 +367,10 @@
       * { scroll-behavior: auto !important; }
       .book { transition: none; }
     }
-
-
-    .site-nav {
-      position: absolute;
-      top: clamp(18px, 3vw, 34px);
-      right: 4vw;
-      z-index: 5;
-      display: flex;
-      align-items: center;
-      gap: clamp(14px, 2.2vw, 30px);
-      color: rgba(239,225,202,.9);
-      font-family: "Yu Mincho", "Hiragino Mincho ProN", serif;
-      font-size: 12px;
-      letter-spacing: .12em;
-    }
-
-    .site-nav a {
-      padding: 8px 0;
-      border-bottom: 1px solid transparent;
-      transition: border-color .2s ease;
-    }
-
-    .site-nav a:hover,
-    .site-nav a:focus-visible {
-      border-color: rgba(239,225,202,.58);
-      outline: none;
-    }
-
-    a.book {
-      display: flex;
-      align-items: stretch;
-      text-decoration: none;
-    }
-
-    @media (max-width: 620px) {
-      .site-nav {
-        top: 14px;
-        right: 18px;
-        gap: 16px;
-        font-size: 10px;
-      }
-    }
-  </style>
+</style>
 </head>
 <body>
   <header class="hero">
-    <nav class="site-nav" aria-label="メインナビゲーション">
-      <a href="#bookshelf">本棚</a>
-      <a href="books/about.html">書き手について <span lang="en">About</span></a>
-    </nav>
     <img
       src="assets/hermes-room.webp"
       alt="東京タワーを望む夜の書斎。机には書きかけのノートとペン、ワインと灯りが置かれている。"
@@ -424,6 +378,9 @@
       height="628"
       fetchpriority="high"
     >
+    <a class="hero-hotspot hotspot-bookshelf" href="#bookshelf">本棚へ</a>
+    <a class="hero-hotspot hotspot-about" href="books/about.html">書き手について</a>
+    <a class="hero-hotspot hotspot-vol00" href="books/vol00.html">はじめての方へ</a>
     <a class="hero-link" href="#bookshelf">観測の本棚へ</a>
   </header>
 
